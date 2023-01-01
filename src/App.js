@@ -1,13 +1,47 @@
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import { Navbar, Sidebar, Footer } from "./components";
+import {
+  Home,
+  SingleProducts,
+  Product,
+  Error,
+  Cart,
+  Checkout,
+  About,
+  PrivateRoute,
+} from "./pages";
 
 function App() {
   return (
-    <div>
-      <h4>comfy sloth starter</h4>
-    </div>
-  )
+    <Router>
+      <Navbar />
+      <Sidebar />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/about">
+          <About />
+        </Route>
+        <Route exact path="/products">
+          <Product />
+        </Route>
+        <Route exact path="/cart">
+          <Cart />
+        </Route>
+        <Route exact path="/checkout">
+          <Checkout />
+        </Route>
+        <Route exact path="/products/:id" children={<SingleProducts />}></Route>
+        <Route path="*">
+          <Error />
+        </Route>
+      </Switch>
+      <Footer />
+    </Router>
+  );
 }
 
-export default App
+export default App;
