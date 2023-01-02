@@ -27,6 +27,7 @@ function Navbar() {
           </li>
         })}
       </ul>
+      <CartButtons />
     </div>
   </NavContainer>
     )
@@ -37,6 +38,7 @@ const NavContainer = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: var(--light-shadow);
 
   .nav-center{
     width: 90vw;
