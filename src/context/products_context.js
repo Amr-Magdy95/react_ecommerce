@@ -19,7 +19,10 @@ const initialState = {
   products_loading: false,
   products_error: false,
   products:[],
-  featured_products: []
+  featured_products: [],
+  single_product_loading: false,
+  single_product_error: false,
+  single_product: {}
 };
 
 const ProductsContext = React.createContext();
@@ -44,6 +47,16 @@ export const ProductsProvider = ({ children }) => {
 
     }catch(error){
       dispatch({type: GET_PRODUCTS_ERROR, payload: error})
+    }
+  }
+  const fetchSingleProduct = async (url)=>{
+    dispatch({type: GET_SINGLE_PRODUCT_BEGIN});
+    try{
+      const response = await axios(url);
+      const singleProduct = response.data;
+      dispatch({type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct});
+    }catch(err){
+      dispatch({type: GET_SINGLE_PRODUCT_ERROR});
     }
   }
 
