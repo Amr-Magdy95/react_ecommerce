@@ -8,6 +8,20 @@ import styled from "styled-components";
 function AddToCart({ product }) {
   const { id, stock, colors } = product;
   const [mainColor, setMainColor] = useState(colors[0]);
+  const [amount, setAmount] = useState(1);
+
+  const increase = () => {
+    if(amount <= stock){
+      setAmount(amount + 1);
+
+    }
+  };
+  const decrease = () => {
+    if(amount > 0){
+      setAmount(amount - 1);
+
+    }
+  };
 
   return (
     <Wrapper>
@@ -32,26 +46,35 @@ function AddToCart({ product }) {
           })}
         </div>
       </div>
-      <div className="btn-container"></div>
+      <div className="btn-container">
+        <AmountButtons
+          amount={amount}
+          increase={increase}
+          decrease={decrease}
+        />
+        <Link to="/cart" className="btn">
+          Add to Cart
+        </Link>
+      </div>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.section`
   margin-top: 2rem;
-  .colors{
+  .colors {
     display: grid;
     grid-template-columns: 125px 1fr;
     align-items: center;
     margin-bottom: 1rem;
-    span{
+    span {
       text-transform: capitalize;
       font-weight: 700;
     }
-    div{
+    div {
       display: flex;
     }
-    .color-btn{
+    .color-btn {
       display: inline-block;
       width: 1.5rem;
       height: 1.5rem;
@@ -64,18 +87,18 @@ const Wrapper = styled.section`
       display: flex;
       align-items: center;
       justify-content: center;
-      svg{
+      svg {
         font-size: 1rem;
         color: var(--clr-white);
       }
     }
-    .active{
+    .active {
       opacity: 1;
     }
-    .btn-container{
+    .btn-container {
       margin-top: 2rem;
     }
-    .btn{
+    .btn {
       margin-top: 1rem;
       width: 140px;
     }
