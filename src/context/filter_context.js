@@ -25,7 +25,7 @@ export const FilterContextProvider = ({children})=>{
       dispatch({type: LOAD_PRODUCTS, payload: products});
     }, [products])
     const [state, dispatch] = useReducer( reducer, initialState);
-    return (<FilterContext.Provider value="hello">{children}</FilterContext.Provider>)
+    return (<FilterContext.Provider value={{...state}}>{children}</FilterContext.Provider>)
 }
 
 export const useFilterContext = () =>{
