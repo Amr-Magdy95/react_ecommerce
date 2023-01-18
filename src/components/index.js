@@ -14,6 +14,10 @@ import AddToCart from './AddToCart';
 import Filters from './Filters';
 import Sort from './Sort';
 import ProductList from './ProductList';
+import CartContent from './CartContent';
+import CartColumns from './CartColumns';
+import CartItem from './CartItem';
+import CartTotals from './CartTotals';
 
 
 export {
@@ -32,5 +36,9 @@ export {
     AddToCart,
     Filters,
     Sort,
-    ProductList
+    ProductList,
+    CartContent,
+    CartColumns,
+    CartItem,
+    CartTotals
 }
