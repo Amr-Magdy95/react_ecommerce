@@ -9,12 +9,20 @@ import CartButtons from "./CartButtons";
 import { useUserContext } from "../context/user_context";
 
 function Sidebar() {
-  const {isSidebarOpen, closeSidebar} = useProductsContext();
+  const { isSidebarOpen, closeSidebar } = useProductsContext();
+  const { myUser } = useUserContext();
   return (
     <SidebarContainer>
-      <aside className={ `${isSidebarOpen? "sidebar show-sidebar": "sidebar"}` }>
+      <aside
+        className={`${isSidebarOpen ? "sidebar show-sidebar" : "sidebar"}`}
+      >
         <div className="sidebar-header">
-          <img src={logo} className="logo" alt="comfy sloth" onClick={closeSidebar} />
+          <img
+            src={logo}
+            className="logo"
+            alt="comfy sloth"
+            onClick={closeSidebar}
+          />
           <button className="close-btn" type="button" onClick={closeSidebar}>
             <FaTimes />
           </button>
@@ -23,13 +31,19 @@ function Sidebar() {
           {links.map(({ id, text, url }) => {
             return (
               <li key={id}>
-                <Link to={url} onClick={closeSidebar}>{text}</Link>
+                <Link to={url} onClick={closeSidebar}>
+                  {text}
+                </Link>
               </li>
             );
           })}
-          <li>
-            <Link to="/checkout" onClick={closeSidebar}>checkout</Link>
-          </li>
+          {myUser && (
+            <li>
+              <Link to="/checkout" onClick={closeSidebar}>
+                checkout
+              </Link>
+            </li>
+          )}
         </ul>
         <CartButtons />
       </aside>
@@ -39,36 +53,35 @@ function Sidebar() {
 
 const SidebarContainer = styled.div`
   text-align: center;
-  .sidebar-header{
+  .sidebar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 1.5rem;
   }
 
-  .close-btn{
+  .close-btn {
     font-size: 2rem;
     background: transparent;
     border-color: transparent;
     color: var(--clr-red-dark);
     cursor: pointer;
     margin-top: 0.2rem;
-
   }
-  .close-btn:hover{
+  .close-btn:hover {
     color: var(--clr-red-light);
   }
 
-  .logo{
+  .logo {
     justify-self: center;
     height: 45px;
   }
 
-  .links{
+  .links {
     margin-bottom: 2rem;
   }
 
-  .links a{
+  .links a {
     display: block;
     text-align: left;
     font-size: 1rem;
@@ -79,15 +92,15 @@ const SidebarContainer = styled.div`
     letter-spacing: var(--spacing);
   }
 
-  .links a:hover{
+  .links a:hover {
     padding: 1rem 1.5rem;
     padding-left: 2rem;
-    border-left:5px solid var(--clr-grey-2);
+    border-left: 5px solid var(--clr-grey-2);
     color: var(--clr-grey-2);
     background: var(--clr-grey-10);
   }
 
-  .sidebar{
+  .sidebar {
     position: fixed;
     top: 0;
     left: 0;
@@ -97,19 +110,18 @@ const SidebarContainer = styled.div`
     transition: var(--transition);
     transform: translate(-100%);
     z-index: -1;
-
   }
 
-  .show-sidebar{
+  .show-sidebar {
     transform: translate(0);
     z-index: 999;
   }
 
-  .cart-btn-wrapper{
+  .cart-btn-wrapper {
     margin: 2rem auto;
   }
-  @media screen and (min-width: 992px){
-    .sidebar{
+  @media screen and (min-width: 992px) {
+    .sidebar {
       display: none;
     }
   }
